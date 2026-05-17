@@ -20,8 +20,8 @@ chmod +x /lib/lsb/init-functions
 echo "===> Installing ZeroTier Binaries..."
 mkdir -p zt
 cd zt || exit
-curl -O https://download.zerotier.com/debian/bullseye/pool/main/z/zerotier-one/zerotier-one_1.8.1_riscv64.deb
-ar x zerotier-one_1.8.1_riscv64.deb && xzcat data.tar.xz | tar -xvf -
+curl -O https://download.zerotier.com/debian/bullseye/pool/main/z/zerotier-one/zerotier-one_1.16.1_riscv64.deb
+ar x zerotier-one_1.16.1_riscv64.deb && xzcat data.tar.xz | tar -xvf -
 
 cp -r ./usr/sbin/* /usr/sbin/
 cp -r ./etc/init.d/zerotier-one /etc/init.d/S97zerotier-one
