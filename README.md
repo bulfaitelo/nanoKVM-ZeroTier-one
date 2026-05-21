@@ -2,7 +2,7 @@
 
 [![Platform: Sipeed NanoKVM](https://img.shields.io/badge/Platform-Sipeed%20NanoKVM-blue)](#)
 [![Architecture: RISC-V](https://img.shields.io/badge/Architecture-RISC--V-orange)](#)
-[![ZeroTier](https://img.shields.io/badge/ZeroTier-Supported-yellow)](#)
+[![ZeroTier](https://img.shields.io/badge/ZeroTier-v1.8.4-yellow)](#)
 
 *Read this in other languages: [English](#english) | [Português](#portugues)*
 
@@ -11,22 +11,67 @@
 <a id="english"></a>
 ## 🇺🇸 English
 
-Automated ZeroTier installation and update script specifically designed for the **Sipeed NanoKVM** (RISC-V architecture).
+Automated ZeroTier installation script specifically designed for the **Sipeed NanoKVM** (RISC-V architecture).
 
-Since NanoKVM runs a very minimalist OS, installing ZeroTier directly can lead to missing compiler library errors (like `GLIBCXX`). This script handles everything automatically, including local dependency resolution.
+Since NanoKVM runs a minimalist OS compiled with older standard libraries (GCC 10), installing recent ZeroTier versions directly leads to critical `GLIBCXX` missing library errors. Furthermore, forcing newer libraries into the system breaks the NanoKVM web and video interface. 
+
+This installer elegantly solves this by packaging and targeting **ZeroTier v1.8.4**—a meticulously selected version that perfectly matches the NanoKVM's native `libstdc++` environment. It provides a clean, native installation with zero hacks, ensuring your KVM interface remains 100% stable.
 
 ### ✨ Features
-* **Dependency Injection:** Automatically resolves and installs missing dynamic libraries (`libc6`, `libstdc++6`) required by recent ZeroTier versions.
-* **Safe Updates:** You can run this script to update ZeroTier. It will safely stop the service and overwrite binaries **without** deleting your Node ID/Network Identity.
-* **Clean Execution:** Uses isolated temporary folders for extraction to prevent garbage buildup on your device.
+* **100% Native Compatibility:** No dangerous external dependency injection needed. It runs flawlessly using NanoKVM's native system libraries.
+* **Safe Re-installs:** Preserves your existing `/var/lib/zerotier-one` identity, keeping your Node ID intact.
+* **Error-Proof Execution:** Automatically sanitizes scripts (handles Windows `\r` line-ending issues) to prevent "applet not found" or syntax errors during installation.
 
 ### 🚀 Quick Start
 
-Run the following commands on your NanoKVM terminal to download, extract, and install:
+Run the following commands in your NanoKVM terminal to download, extract, and install:
 
 ```sh
-mkdir -p nanokvm-zerotier && cd nanokvm-zerotier
 curl -LO [https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar](https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar)
-tar xvf nanokvm-zerotier.tar
+tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier
 chmod +x install.sh
 ./install.sh
+
+Once installed, check your status and join a network:
+Bash
+
+zerotier-cli info
+zerotier-cli join <your-network-id>
+
+📚 Context & Credits
+
+Please find additional info, discussions, and context regarding this implementation in Sipeed NanoKVM Issue #79.
+🇧🇷 Português
+
+Script automatizado de instalação do ZeroTier desenhado especificamente para o Sipeed NanoKVM (arquitetura RISC-V).
+
+Como o NanoKVM roda um sistema operacional muito minimalista compilado com bibliotecas antigas (GCC 10), instalar versões recentes do ZeroTier gera erros críticos de falta de biblioteca (GLIBCXX). Por outro lado, forçar a injeção de bibliotecas mais novas no sistema quebra a interface de vídeo e web do NanoKVM.
+
+Este instalador resolve o problema de forma elegante ao utilizar o ZeroTier v1.8.4 — uma versão minuciosamente selecionada que possui compatibilidade perfeita com o ambiente libstdc++ nativo do NanoKVM. O resultado é uma instalação limpa, sem "gambiarras", mantendo a interface do seu KVM 100% estável.
+✨ Diferenciais
+
+    100% de Compatibilidade Nativa: Não requer injeção perigosa de dependências externas. Funciona perfeitamente com as bibliotecas originais do sistema.
+
+    Reinstalações Seguras: Preserva sua identidade de rede existente em /var/lib/zerotier-one, mantendo seu Node ID intacto.
+
+    À Prova de Erros: Higieniza os scripts automaticamente (corrigindo quebras de linha \r do Windows) para evitar falhas de sintaxe ("applet not found") durante a instalação.
+
+🚀 Como Instalar
+
+Execute os comandos abaixo no terminal do seu NanoKVM para baixar o pacote, extrair e iniciar a instalação:
+Bash
+
+curl -LO [https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar](https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar)
+tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier
+chmod +x install.sh
+./install.sh
+
+Após a conclusão, verifique o status e conecte-se à sua rede:
+Bash
+
+zerotier-cli info
+zerotier-cli join <id-da-sua-rede>
+
+📚 Contexto e Créditos
+
+Para mais informações, discussões e contexto sobre a origem desta implementação, consulte a Issue #79 do repositório oficial do NanoKVM.
