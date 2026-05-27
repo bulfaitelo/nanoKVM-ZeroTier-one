@@ -44,22 +44,17 @@ This installer elegantly solves this by packaging and targeting **ZeroTier v1.8.
 Run the following commands in your NanoKVM terminal to download, extract, and install:
 
 
-    curl -LO https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar
-    
-    tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier
-    
-    chmod +x install.sh
-    
+    curl -LO https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar    
+    tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier    
+    chmod +x install.sh    
     ./install.sh
 
   
 
 Once  installed,  check  your  status  and  join  a  network:
 
-    zerotier-cli  info
-    
+    zerotier-cli  info    
     zerotier-cli  join  <your-network-id>
-
 
 
 
@@ -109,12 +104,9 @@ Reinstalações  Seguras:  Preserva  sua  identidade  de  rede  existente  em  /
 Execute  os  comandos  abaixo  no  terminal  do  seu  NanoKVM  para  baixar  o  pacote,  extrair  e  iniciar  a  instalação:
 
 
-    curl -LO https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar
-    
-    tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier
-    
-    chmod +x install.sh
-    
+    curl -LO https://github.com/bulfaitelo/nanoKVM-ZeroTier-one/releases/download/latest/nanokvm-zerotier.tar    
+    tar xvf nanokvm-zerotier.tar && cd nanokvm-zerotier    
+    chmod +x install.sh    
     ./install.sh
 
   
@@ -122,8 +114,7 @@ Execute  os  comandos  abaixo  no  terminal  do  seu  NanoKVM  para  baixar  o  
 Após  a  conclusão,  verifique  o  status  e  conecte-se  à  sua  rede:
 
 
-    zerotier-cli  info
-    
+    zerotier-cli  info    
     zerotier-cli  join  <id-da-sua-rede>
 
   
